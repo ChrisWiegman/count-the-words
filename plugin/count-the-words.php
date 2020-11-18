@@ -13,7 +13,7 @@
  * @package ChrisWiegman\Count_the_Words
  */
 
-define( 'CHRISWIEGMAN_COUNT_THE_WORDS_VERSION', '0.0.1' );
+use ChrisWiegman\Count_the_Words\Counter;
 
 /**
  * Load plugin functionality.
@@ -22,8 +22,14 @@ define( 'CHRISWIEGMAN_COUNT_THE_WORDS_VERSION', '0.0.1' );
  */
 function cw_count_the_words_loader() {
 
+	$plugin_url  = plugin_dir_url( __FILE__ );
+	$plugin_info = get_file_data( __FILE__, array( 'Version' => 'Version' ) );
+
 	// Load the text domain.
 	load_plugin_textdomain( 'count-the-words', false, dirname( dirname( __FILE__ ) ) . '/languages' );
+
+	// Load the counter.
+	new Counter( $plugin_info['Version'], $plugin_url );
 
 }
 
