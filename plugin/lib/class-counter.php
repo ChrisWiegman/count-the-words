@@ -91,11 +91,35 @@ class Counter {
 	/**
 	 * Gets the word count for a given post or array of posts
 	 *
-	 * @param int|array $post_ID Post ID or array of post IDs to check.
+	 * @param int|array $posts Post ID or array of post IDs to check.
 	 *
 	 * @return int|array Int of word count for single post or array keyed to post ID for multiple posts.
 	 */
-	public function get_word_count( $post_ID ) {
+	public function get_count( $posts ) {
+
+		if ( is_array( $posts ) ) {
+
+			$counts = array();
+
+			foreach ( $posts as $id ) {
+				$counts[ $id ] = $this->get_word_count( $id );
+			}
+
+			return $counts;
+		}
+
+		return $this->get_word_count( $posts );
+
+	}
+
+	/**
+	 * Gets the word count for a given post or array of posts
+	 *
+	 * @param int $post_ID Post ID of post to retrieve.
+	 *
+	 * @return int Int of word count.
+	 */
+	protected function get_word_count( $post_ID ) {
 
 		$count = get_post_meta( $post_ID, $this->meta_key, true );
 
