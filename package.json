@@ -1,0 +1,18 @@
+{
+  "name": "count-the-words",
+  "description": "Word counts and statistics for WordPress authors of all types.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChrisWiegman/count-the-words"
+  },
+  "author": "Chris Wiegman <contact@chriswiegman.com>",
+  "license": "GPLv2",
+  "homepage": "https://chriswiegman.com/",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-minify": "3.1.0",
+    "gulp-wp-pot": "^2.5.0",
+    "jshint": "^2.12.0"
+  }
+}

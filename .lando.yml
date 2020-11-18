@@ -1,0 +1,26 @@
+name: count-the-words
+recipe: wordpress
+config:
+  webroot: wordpress
+  php: '7.4'
+  via: nginx
+  database: mariadb
+  xdebug: true
+services:
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
+  appserver:
+    overrides:
+      volumes:
+        - ./plugin:/app/wordpress/wp-content/plugins/count-the-words
+tooling:
+  phpunit:
+    service: appserver
+    cmd: vendor/bin/phpunit
