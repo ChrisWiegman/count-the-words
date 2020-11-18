@@ -32,6 +32,10 @@ function cw_count_the_words_loader() {
 	$counter = new Counter( $plugin_info['Version'], $plugin_url );
 	$counter->register_hooks();
 
+	if ( defined( 'WP_CLI' ) && WP_CLI ) {
+		\WP_CLI::add_command( 'count-the-words', '\ChrisWiegman\Count_the_Words\CLI_Command' );
+	}
+
 }
 
 /**
