@@ -29,7 +29,8 @@ function cw_count_the_words_loader() {
 	load_plugin_textdomain( 'count-the-words', false, dirname( dirname( __FILE__ ) ) . '/languages' );
 
 	// Load the counter.
-	new Counter( $plugin_info['Version'], $plugin_url );
+	$counter = new Counter( $plugin_info['Version'], $plugin_url );
+	$counter->register_hooks();
 
 }
 
