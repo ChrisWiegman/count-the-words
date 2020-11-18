@@ -89,6 +89,32 @@ class Counter {
 	}
 
 	/**
+	 * Gets the word count for a given post or array of posts
+	 *
+	 * @param int|array $post_ID Post ID or array of post IDs to check.
+	 *
+	 * @return int|array Int of word count for single post or array keyed to post ID for multiple posts.
+	 */
+	public function get_word_count( $post_ID ) {
+
+		$count = get_post_meta( $post_ID, $this->meta_key, true );
+
+		// Save the word count if we don't have it already.
+		if ( false === $count ) {
+
+			$post = get_post( $post_ID );
+
+			$count = $this->count_in_content( $post->post_content );
+
+			update_post_meta( $post_ID, $this->meta_key, $count );
+
+		}
+
+		return $count;
+
+	}
+
+	/**
 	 * Count the words in a given block of content.
 	 *
 	 * @since 1.0.0
