@@ -55,6 +55,8 @@ function perform_uninstall() {
  */
 function clean_data() {
 
+	delete_post_meta_by_key( 'cw-count-the-words-count' );
+
 }
 
 /**
