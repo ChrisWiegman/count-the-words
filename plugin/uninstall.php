@@ -4,14 +4,14 @@
  *
  * Used when clicking "Delete" from inside of WordPress's plugins page.
  *
- * @package WPEngine\Count_the_Words
+ * @package ChrisWiegman\Count_the_Words
  *
  * @since   1.0.0
  *
  * @author  Chris Wiegman <contact@chriswiegman.com>
  */
 
-namespace WPEngine\Count_the_Words\Uninstall;
+namespace ChrisWiegman\Count_the_Words\Uninstall;
 
 /**
  * Initialize uninstaller

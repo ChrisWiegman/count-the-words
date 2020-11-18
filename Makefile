@@ -87,8 +87,6 @@ ifdef HAS_LANDO
 	if [ ! -f ./wordpress/wp-config.php ]; then \
 		$(MAKE) setup-wordpress; \
 		$(MAKE) setup-wordpress-plugins; \
-		$(MAKE) setup-woocommerce; \
-		$(MAKE) setup-sample-data; \
 		echo "You can open your dev site at: ${HIGHLIGHT}https://count-the-words.lndo.site${END_HIGHLIGHT}"; \
 		echo "See the readme for further details."; \
 	fi
@@ -108,35 +106,6 @@ release: | build-assets count-the-words.zip
 
 .PHONY: reset
 reset: stop clean
-
-.PHONY: setup-sample-data
-setup-sample-data:
-	@echo "Setting up sample WooCommerce data"
-	if [ ! -d ./wordpress/wp-content/plugins/wc-smooth-generator/ ]; then \
-		git clone https://github.com/woocommerce/wc-smooth-generator.git ./wordpress/wp-content/plugins/wc-smooth-generator; \
-	fi
-	$(DOCKER_RUN) $(COMPOSER_WC_SMOOTH_GENERATOR_CONTAINER) install
-	lando wp plugin activate wc-smooth-generator --path=./wordpress
-	lando wp --path=./wordpress wc generate products 20
-	lando wp --path=./wordpress wc generate customers 10
-	lando wp --path=./wordpress wc generate orders 30
-
-.PHONY: setup-woocommerce
-setup-woocommerce:
-	@echo "Setting up WooCommerce"
-	lando wp theme install --path=./wordpress storefront --activate
-	lando wp plugin install --path=./wordpress woocommerce --activate
-	lando wp option update --path=./wordpress woocommerce_store_address '504 Lavaca St'
-	lando wp option update --path=./wordpress woocommerce_store_city 'Austin'
-	lando wp option update --path=./wordpress woocommerce_default_country 'US:TX'
-	lando wp option update --path=./wordpress woocommerce_store_postcode '78701'
-	lando wp option update --path=./wordpress woocommerce_currency 'USD'
-	lando wp option update --path=./wordpress woocommerce_weight_unit 'oz'
-	lando wp option update --path=./wordpress woocommerce_dimension_unit 'in'
-	lando wp option update --path=./wordpress woocommerce_demo_store 'yes'
-	lando wp option update --path=./wordpress woocommerce_product_type 'both'
-	lando wp option update --path=./wordpress woocommerce_setup_shipping_labels '1'
-	lando wp wc tool run install_pages --user=1 --path=./wordpress
 
 .PHONY: setup-wordpress
 setup-wordpress:

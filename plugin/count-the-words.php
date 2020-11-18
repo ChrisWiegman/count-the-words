@@ -6,21 +6,21 @@
  * Version: 0.0.1
  * Text Domain: count-the-words
  * Domain Path: /languages
- * Author: WP Engine
- * Author URI: https://wpengine.com/
+ * Author: Chris Wiegman
+ * Author URI: https://chriswiegman.com/
  * License: GPLv2
  *
- * @package WPEngine\Count_the_Words
+ * @package ChrisWiegman\Count_the_Words
  */
 
-define( 'WPENGINE_COUNT_THE_WORDS_VERSION', '0.0.1' );
+define( 'CHRISWIEGMAN_COUNT_THE_WORDS_VERSION', '0.0.1' );
 
 /**
  * Load plugin functionality.
  *
  * @since 1.0.0
  */
-function wpe_count_the_words_loader() {
+function cw_count_the_words_loader() {
 
 	// Load the text domain.
 	load_plugin_textdomain( 'count-the-words', false, dirname( dirname( __FILE__ ) ) . '/languages' );
@@ -35,9 +35,9 @@ function wpe_count_the_words_loader() {
  * @param string $class The name of the class to get.
  * @return string
  */
-function wpe_count_the_words_get_class_file( $class ) {
+function cw_count_the_words_get_class_file( $class ) {
 
-	$prefix   = 'WPEngine\\Count_the_Words\\';
+	$prefix   = 'ChrisWiegman\\Count_the_Words\\';
 	$base_dir = __DIR__ . '/lib/';
 
 	$len = strlen( $prefix );
@@ -69,15 +69,15 @@ function wpe_count_the_words_get_class_file( $class ) {
  *
  * @param object $class The class to load.
  */
-function wpe_count_the_words_autoloader( $class ) {
+function cw_count_the_words_autoloader( $class ) {
 
-	$file = wpe_count_the_words_get_class_file( $class );
+	$file = cw_count_the_words_get_class_file( $class );
 
 	if ( ! empty( $file ) && file_exists( $file ) ) {
 		include $file;
 	}
 }
 
-spl_autoload_register( 'wpe_count_the_words_autoloader' );
+spl_autoload_register( 'cw_count_the_words_autoloader' );
 
-add_action( 'plugins_loaded', 'wpe_count_the_words_loader' );
+add_action( 'plugins_loaded', 'cw_count_the_words_loader' );

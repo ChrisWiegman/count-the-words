@@ -11,7 +11,7 @@ Before starting your workstation will need the following:
 
 1. Clone the repository
 
-`git@github.com:wpengine/count-the-words.git`
+`git@github.com:ChrisWiegman/count-the-words.git`
 
 2. Start Lando
 
