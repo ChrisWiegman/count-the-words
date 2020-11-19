@@ -22,24 +22,6 @@ class PluginFileTest extends \WP_Mock\Tools\TestCase {
 	public function test_wpe_count_the_words_loader() {
 
 		\WP_Mock::userFunction(
-			'plugin_dir_url',
-			array(
-				'times' => 1,
-				'return' => 'https://wpengine.com/'
-			)
-		);
-
-		\WP_Mock::userFunction(
-			'get_file_data',
-			array(
-				'times' => 1,
-				'return' => array(
-					'version' => '1.0.0',
-				)
-			)
-		);
-
-		\WP_Mock::userFunction(
 			'load_plugin_textdomain',
 			array(
 				'times' => 1,

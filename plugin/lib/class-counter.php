@@ -17,24 +17,6 @@ namespace ChrisWiegman\Count_the_Words;
 class Counter {
 
 	/**
-	 * The plugin URL
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var string
-	 */
-	public $plugin_url;
-
-	/**
-	 * The plugin version
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var string
-	 */
-	public $plugin_version;
-
-	/**
 	 * The meta key when saving word counts
 	 *
 	 * @since 1.0.0
@@ -42,21 +24,6 @@ class Counter {
 	 * @var string
 	 */
 	protected $meta_key = 'cw-count-the-words-count';
-
-	/**
-	 * Setup the counter
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $plugin_version The current plugin version.
-	 * @param string $plugin_url The url of the plugin.
-	 */
-	public function __construct( $plugin_version, $plugin_url ) {
-
-		$this->plugin_version = $plugin_version;
-		$this->plugin_url     = $plugin_url;
-
-	}
 
 	/**
 	 * Register all hooks for the counter.
