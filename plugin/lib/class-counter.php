@@ -170,4 +170,34 @@ class Counter {
 		return $count;
 
 	}
+
+	public function get_counts( $post_type = 'post', $date = 'all', $period = 'month' ) {
+
+		$word_count = 0;
+
+		$query_args = array(
+			'post_type'   => $post_type,
+			'numberposts' => -1,
+			'post_status' => 'publish',
+		);
+
+		if ( 'all' !== $date ) {
+			// Setup a date query.
+			$query_args = array();
+		}
+
+		$posts = get_posts( $query_args );
+
+		foreach ( $posts as $post ) {
+
+			$post_count = get_post_meta( $post->ID, $this->meta_key, true );
+
+			if ( false !== $post_count ) {
+				$word_count = $word_count + $post_count;
+			}
+		}
+
+		return $word_count;
+
+	}
 }

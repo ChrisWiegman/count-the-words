@@ -39,6 +39,8 @@ function cw_count_the_words_loader() {
 		\WP_CLI::add_command( 'count-the-words', $cli_command );
 
 	}
+
+	$counter->get_counts();
 }
 
 /**
