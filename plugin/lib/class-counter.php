@@ -82,9 +82,22 @@ class Counter {
 	 */
 	public function action_save_post( $post_ID, $post, $update ) {
 
+		$this->save_post( $post );
+
+	}
+
+	/**
+	 * Saves the word count for a given post
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post The WP_Post object.
+	 */
+	public function save_post( $post ) {
+
 		$count = $this->count_in_content( $post->post_content );
 
-		update_post_meta( $post_ID, $this->meta_key, $count );
+		update_post_meta( $post->ID, $this->meta_key, $count );
 
 	}
 

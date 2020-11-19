@@ -91,7 +91,7 @@ class CLI_Command {
 			}
 
 			foreach ( $posts as $post ) {
-				$this->counter->action_save_post( $post->ID, $post, false );
+				$this->counter->save_post( $post );
 				$progress->tick();
 			}
 
