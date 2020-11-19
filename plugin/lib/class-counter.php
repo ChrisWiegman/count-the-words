@@ -146,10 +146,11 @@ class Counter {
 	 * @param string|array $post_type The post type to count (Default: post).
 	 * @param string       $date The date to count. Default(all).
 	 * @param string       $period The period to count (month, day or year). Only applies if date is not "all" (Default: month).
+	 * @param bool         $include_post_count True to include the post count in array format or false (default: true).
 	 *
-	 * @return int Count of words in available posts
+	 * @return array|int|bool Count of words in available posts. Integer of wordcount if $include_post_count is false or array containg word and post count. Returns false on error.
 	 */
-	public function get_counts( $post_type = 'post', $date = 'all', $period = 'month' ) {
+	public function get_counts( $post_type = 'post', $date = 'all', $period = 'month', $include_post_count = true ) {
 
 		$word_count = 0;
 
@@ -160,9 +161,36 @@ class Counter {
 		);
 
 		if ( 'all' !== $date ) {
+
+			$timestamp = strtotime( $date );
+
+			if ( false === $timestamp ) {
+				return false;
+			}
+
+			$date_query = array();
+
+			$date_query['year'] = gmdate( 'Y', $timestamp );
+
+			switch ( $period ) {
+				case 'day':
+					$date_query['month'] = gmdate( 'm', $timestamp );
+					$date_query['day']   = gmdate( 'd', $timestamp );
+					break;
+				case 'month':
+					$date_query['month'] = gmdate( 'm', $timestamp );
+					break;
+				case 'year':
+					break;
+				default:
+					return false;
+
+			}
+
 			// Setup a date query.
-			$query_args = array();
-		}
+			$query_args['date_query'] = $date_query;
+
+		}//end if
 
 		$posts = get_posts( $query_args );
 
@@ -173,6 +201,14 @@ class Counter {
 			if ( false !== $post_count ) {
 				$word_count = $word_count + $post_count;
 			}
+		}
+
+		if ( true === $include_post_count ) {
+
+			return array(
+				'post_count' => count( $posts ),
+				'word_count' => $word_count,
+			);
 		}
 
 		return $word_count;

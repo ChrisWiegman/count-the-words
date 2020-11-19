@@ -37,7 +37,7 @@ function cw_count_the_words_loader() {
 
 	}
 
-	$counter->get_counts();
+	$counter->get_counts( 'any', 'Nov 18, 2020', 'day' );
 }
 
 /**
