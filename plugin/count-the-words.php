@@ -13,6 +13,7 @@
  * @package ChrisWiegman\Count_the_Words
  */
 
+use ChrisWiegman\Count_the_Words\CLI_Command;
 use ChrisWiegman\Count_the_Words\Counter;
 
 /**
@@ -33,9 +34,11 @@ function cw_count_the_words_loader() {
 	$counter->register_hooks();
 
 	if ( defined( 'WP_CLI' ) && WP_CLI ) {
-		\WP_CLI::add_command( 'count-the-words', '\ChrisWiegman\Count_the_Words\CLI_Command' );
-	}
 
+		$cli_command = new CLI_Command( $counter );
+		\WP_CLI::add_command( 'count-the-words', $cli_command );
+
+	}
 }
 
 /**
