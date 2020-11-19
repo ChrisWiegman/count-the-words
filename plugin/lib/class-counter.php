@@ -171,6 +171,17 @@ class Counter {
 
 	}
 
+	/**
+	 * Get the word counts for a group of posts
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string|array $post_type The post type to count (Default: post).
+	 * @param string       $date The date to count. Default(all).
+	 * @param string       $period The period to count (month, day or year). Only applies if date is not "all" (Default: month).
+	 *
+	 * @return int Count of words in available posts
+	 */
 	public function get_counts( $post_type = 'post', $date = 'all', $period = 'month' ) {
 
 		$word_count = 0;
