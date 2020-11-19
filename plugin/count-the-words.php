@@ -15,6 +15,7 @@
 
 use ChrisWiegman\Count_the_Words\CLI_Command;
 use ChrisWiegman\Count_the_Words\Counter;
+use ChrisWiegman\Count_the_Words\Shortcode;
 
 /**
  * Load plugin functionality.
@@ -36,6 +37,11 @@ function cw_count_the_words_loader() {
 		\WP_CLI::add_command( 'count-the-words', $cli_command );
 
 	}
+
+	// Register the shortcode.
+	$shortcode = new Shortcode( $counter );
+	$shortcode->register_hooks();
+
 }
 
 /**
