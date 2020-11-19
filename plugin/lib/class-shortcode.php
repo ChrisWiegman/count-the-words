@@ -74,7 +74,11 @@ class Shortcode {
 
 		$counts = $this->counter->get_counts();
 
-		return sprintf( 'Posts: %d, Words: %d', $counts['post_count'], $counts['word_count'] );
+		if ( empty( $content ) ) {
+			$content = 'Posts: %d, Words: %d';
+		}
+
+		return sprintf( $content, $counts['post_count'], $counts['word_count'] );
 
 	}
 }
