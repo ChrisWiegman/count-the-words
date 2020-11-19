@@ -13,7 +13,7 @@ function minify () {
 }
 
 function pot () {
-  return gulp.src('plugin/*.php')
+  return gulp.src('plugin/**/*.php')
     .pipe(wpPot({
       domain: 'count-the-words',
       package: 'Count the Words'
